@@ -8,17 +8,34 @@
 
 class AppController
   attr_accessor :textField
+  attr_accessor :stopButton
+  attr_accessor :startButton
 
   def initialize
-    @speechSynth = NSSpeechSynthesizer.new
+    @speaker = NSSpeechSynthesizer.new
+    @speaker.delegate = self
   end
+
+
+  ### Action methods
 
   def sayIt(sender)
     return if (s = textField.stringValue).empty?
-    @speechSynth.startSpeakingString(s)
+    @speaker.startSpeakingString(s)
+    startButton.enabled = false
+    stopButton.enabled  = true
   end
 
   def stopIt(sender)
-    @speechSynth.stopSpeaking
+    @speaker.stopSpeaking
   end
+
+
+  ### Delegate methods
+
+  def speechSynthesizer(synth, didFinishSpeaking:complete)
+    startButton.enabled = true
+    stopButton.enabled  = false
+  end
+
 end
