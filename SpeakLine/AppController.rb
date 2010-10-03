@@ -10,10 +10,18 @@ class AppController
   attr_accessor :textField
   attr_accessor :stopButton
   attr_accessor :startButton
+  attr_accessor :tableView
 
   def initialize
+    @voices  = NSSpeechSynthesizer.availableVoices
     @speaker = NSSpeechSynthesizer.new
     @speaker.delegate = self
+  end
+
+  def awakeFromNib
+    ix_defaultVoice = @voices.index NSSpeechSynthesizer.defaultVoice
+    tableView.selectRowIndexes(NSIndexSet.indexSetWithIndex(ix_defaultVoice), byExtendingSelection:false)
+    tableView.scrollRowToVisible(ix_defaultVoice)
   end
 
 
@@ -24,6 +32,7 @@ class AppController
     @speaker.startSpeakingString(s)
     startButton.enabled = false
     stopButton.enabled  = true
+    tableView.enabled   = false
   end
 
   def stopIt(sender)
@@ -36,6 +45,22 @@ class AppController
   def speechSynthesizer(synth, didFinishSpeaking:complete)
     startButton.enabled = true
     stopButton.enabled  = false
+    tableView.enabled   = true
+  end
+
+  def tableViewSelectionDidChange(notification)
+    @voices[tableView.selectedRow].tap { |v| @speaker.voice = v if v }
+  end
+
+
+  ### TableView datasource methods
+
+  def numberOfRowsInTableView(tableView)
+    @voices.count
+  end
+
+  def tableView(tableView, objectValueForTableColumn:column, row:rowIndex)
+    NSSpeechSynthesizer.attributesForVoice(@voices[rowIndex])[NSVoiceName]
   end
 
 end
