@@ -13,6 +13,10 @@ class AppController
     @todos = []
   end
 
+  def awakeFromNib
+    class << toDoTableView; include ::TableViewRowDeletable; end
+  end
+
   ### Action methods
 
   def createNewItem(sender)
@@ -37,6 +41,10 @@ class AppController
   def tableView(tableView, setObjectValue:string, forTableColumn:column, row:rowIndex)
     @todos[rowIndex] = string.strip
     return unless @todos[rowIndex].empty?
+    tableView(tableView, deleteObjectAtIndex:rowIndex)
+  end
+
+  def tableView(tableView, deleteObjectAtIndex:rowIndex)
     @todos.slice!(rowIndex)
     tableView.reloadData
   end
