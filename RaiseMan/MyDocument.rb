@@ -7,12 +7,26 @@
 #
 
 class MyDocument < NSDocument
-  attr_accessor :employees
+  attr_accessor :employees, :tableView, :employeeController
 
   def init
     super
     @employees = []
     self
+  end
+
+  def endEditing
+    tableView.window.tap { |w| w.makeFirstResponder(w) or return }
+    undoManager.instance_eval { (endUndoGrouping; beginUndoGrouping) unless groupingLevel.zero? }
+    true
+  end
+
+  def createEmployee(sender)
+    endEditing or return
+    person = employeeController.newObject
+    employeeController.addObject(person)
+    employeeController.rearrangeObjects
+    tableView.editColumn(0, row:employeeController.arrangedObjects.index(person), withEvent:nil, select:true)
   end
 
   def startObservingPerson(person)
