@@ -15,6 +15,45 @@ class MyDocument < NSDocument
     self
   end
 
+  def startObservingPerson(person)
+    %w[ personName expectedRaise ].each { |s| person.addObserver(self, forKeyPath:s, options:NSKeyValueObservingOptionOld, context:nil) }
+  end
+
+  def stopObservingPerson(person)
+    %w[ personName expectedRaise ].each { |s| person.removeObserver(self, forKeyPath:s) }
+  end
+
+  def setEmployees(a)
+    return if a == @employees
+    @employees.each { |person| stopObservingPerson(person) }
+    @employees = a
+    @employees.each { |person| startObservingPerson(person) }
+  end
+
+  def insertObject(person, inEmployeesAtIndex:ix)
+    undoManager.prepareWithInvocationTarget(self).removeObjectFromEmployeesAtIndex(ix)
+    undoManager.actionName = "Insert Person" unless undoManager.isUndoing
+    startObservingPerson(person)
+    employees[ix, 0] = person
+  end
+
+  def removeObjectFromEmployeesAtIndex(ix)
+    person = employees[ix]
+    undoManager.prepareWithInvocationTarget(self).insertObject(person, inEmployeesAtIndex:ix)
+    undoManager.actionName = "Delete Person" unless undoManager.isUndoing
+    startObservingPerson(person)
+    employees.delete_at(ix)
+  end
+
+  def changeKeyPath(keyPath, ofObject:object, toValue:newValue)
+    object.setValue(newValue, forKeyPath:keyPath)
+  end
+
+  def observeValueForKeyPath(keyPath, ofObject:object, change:change, context:context)
+    undoManager.prepareWithInvocationTarget(self).changeKeyPath(keyPath, ofObject:object, toValue:change[NSKeyValueChangeOldKey])
+    undoManager.actionName = "Edit"
+  end
+
 
   ### NSDocument methods (template code)
 
