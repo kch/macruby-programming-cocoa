@@ -11,6 +11,9 @@ This is incomplete. I went up to chapter 9. I don't know when / if I'll do the r
 
 In addition to the exercises, a few challenges are done too.
 
+---
+
+**TL;DR THE GOODS ARE IN THE BRANCHES! IF YOU'RE ON GITHUB JUST USE THE BRANCH MENU AT THE TOP GO TO THE APPS**
 
 ---
 Copyright © 2010 Caio Chassot, MIT license  
