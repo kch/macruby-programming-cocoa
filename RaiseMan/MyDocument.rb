@@ -7,6 +7,7 @@
 #
 
 class MyDocument < NSDocument
+  K_UNIMP_ERR = -4
   attr_accessor :employees, :tableView, :employeeController
 
   def init
@@ -43,6 +44,7 @@ class MyDocument < NSDocument
     @employees = a
     @employees.each { |person| startObservingPerson(person) }
   end
+  alias_method :employees=, :setEmployees
 
   def insertObject(person, inEmployeesAtIndex:ix)
     undoManager.prepareWithInvocationTarget(self).removeObjectFromEmployeesAtIndex(ix)
@@ -69,7 +71,7 @@ class MyDocument < NSDocument
   end
 
 
-  ### NSDocument methods (template code)
+  ### NSDocument methods
 
   # Name of nib containing document window
   def windowNibName
@@ -78,14 +80,17 @@ class MyDocument < NSDocument
 
   # Document data representation for saving (return NSData)
   def dataOfType(type, error:outError)
-    outError.assign(NSError.errorWithDomain(NSOSStatusErrorDomain, code:-4, userInfo:nil))
-    nil
+    tableView.window.endEditingFor(nil)
+    NSKeyedArchiver.archivedDataWithRootObject(employees)
   end
 
   # Read document from data (return non-nil on success)
   def readFromData(data, ofType:type, error:outError)
-    outError.assign(NSError.errorWithDomain(NSOSStatusErrorDomain, code:-4, userInfo:nil))
-    nil
+    self.employees = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+    return true
+  rescue
+    outError.assign(NSError.errorWithDomain(NSOSStatusErrorDomain, code:K_UNIMP_ERR, userInfo:{ NSLocalizedFailureReasonErrorKey => "The data is corrupted." })) if outError
+    return false
   end
 
   # Return lowercase 'untitled', to comply with HIG

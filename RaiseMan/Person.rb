@@ -14,4 +14,15 @@ class Person
     @personName    = "New Person"
   end
 
+  def initWithCoder(coder)
+    @personName    = coder.decodeObjectForKey("personName")
+    @expectedRaise = coder.decodeFloatForKey("expectedRaise")
+    self
+  end
+
+  def encodeWithCoder(coder)
+    coder.encodeObject(personName,   forKey:"personName")
+    coder.encodeFloat(expectedRaise, forKey:"expectedRaise")
+  end
+
 end
