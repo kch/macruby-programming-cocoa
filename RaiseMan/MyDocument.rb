@@ -33,11 +33,12 @@ class MyDocument < NSDocument
   end
 
   def removeEmployee(sender)
+    c = employeeController.selectedObjects.count
     NSAlert.alertWithMessageText("Delete?",
                    defaultButton:"Delete",
-                 alternateButton:"Cancel",
-                     otherButton:nil,
-       informativeTextWithFormat:"Do you really want to delete #{employeeController.selectedObjects.count} people?")
+                 alternateButton:"Keep, but clear raise",
+                     otherButton:"Cancel",
+       informativeTextWithFormat:"Do you really want to delete #{c} #{c == 1 ? 'person' : 'people'}?")
       .beginSheetModalForWindow(tableView.window,
                   modalDelegate:self,
                  didEndSelector:(:"alertEnded:code:context:"),
@@ -45,7 +46,10 @@ class MyDocument < NSDocument
   end
 
   def alertEnded(alert, code:choice, context:_)
-    employeeController.remove(nil) if choice == NSAlertDefaultReturn
+    case choice
+    when NSAlertDefaultReturn  ; employeeController.remove(nil)
+    when NSAlertAlternateReturn; employeeController.selectedObjects.each { |person| person.expectedRaise = 0.0 }
+    end
   end
 
   def startObservingPerson(person)
