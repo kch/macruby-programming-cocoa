@@ -32,6 +32,22 @@ class MyDocument < NSDocument
     tableView.editColumn(0, row:employeeController.arrangedObjects.index(person), withEvent:nil, select:true)
   end
 
+  def removeEmployee(sender)
+    NSAlert.alertWithMessageText("Delete?",
+                   defaultButton:"Delete",
+                 alternateButton:"Cancel",
+                     otherButton:nil,
+       informativeTextWithFormat:"Do you really want to delete #{employeeController.selectedObjects.count} people?")
+      .beginSheetModalForWindow(tableView.window,
+                  modalDelegate:self,
+                 didEndSelector:(:"alertEnded:code:context:"),
+                    contextInfo:nil)
+  end
+
+  def alertEnded(alert, code:choice, context:_)
+    employeeController.remove(nil) if choice == NSAlertDefaultReturn
+  end
+
   def startObservingPerson(person)
     %w[ personName expectedRaise ].each { |s| person.addObserver(self, forKeyPath:s, options:NSKeyValueObservingOptionOld, context:nil) }
   end
