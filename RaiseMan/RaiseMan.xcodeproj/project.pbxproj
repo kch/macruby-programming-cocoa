@@ -10,6 +10,7 @@
 		1A55BB8A1026466A0069E1DF /* MyDocument.rb in Resources */ = {isa = PBXBuildFile; fileRef = 1A55BB891026466A0069E1DF /* MyDocument.rb */; };
 		4DE339F70D74FCDD00ADB6EE /* rb_main.rb in Resources */ = {isa = PBXBuildFile; fileRef = 4DE339F60D74FCDD00ADB6EE /* rb_main.rb */; };
 		4DE3BE140D8651D900ECA448 /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE3BE130D8651D900ECA448 /* MacRuby.framework */; };
+		567CC8F712616F3C00A50D99 /* BBall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 567CC8F612616F3C00A50D99 /* BBall.icns */; };
 		567FE79F12596EDF00C9229B /* Person.rb in Resources */ = {isa = PBXBuildFile; fileRef = 567FE79E12596EDF00C9229B /* Person.rb */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -28,6 +29,7 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		4DE339F60D74FCDD00ADB6EE /* rb_main.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = rb_main.rb; sourceTree = "<group>"; };
 		4DE3BE130D8651D900ECA448 /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = /Library/Frameworks/MacRuby.framework; sourceTree = "<absolute>"; };
+		567CC8F612616F3C00A50D99 /* BBall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BBall.icns; sourceTree = "<group>"; };
 		567FE79E12596EDF00C9229B /* Person.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Person.rb; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* RaiseMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaiseMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				567CC8F612616F3C00A50D99 /* BBall.icns */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				CD6AC70011C94905006B4F03 /* MainMenu.xib */,
@@ -181,6 +184,7 @@
 				CD6AC70111C94905006B4F03 /* MainMenu.xib in Resources */,
 				CD65564C11C94A3C00285927 /* MyDocument.xib in Resources */,
 				567FE79F12596EDF00C9229B /* Person.rb in Resources */,
+				567CC8F712616F3C00A50D99 /* BBall.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,12 +9,12 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>????</string>
+				<string>rsmn</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string></string>
+			<string>BBall</string>
 			<key>CFBundleTypeName</key>
-			<string>DocumentType</string>
+			<string>RaiseMan Doc</string>
 			<key>CFBundleTypeOSTypes</key>
 			<array>
 				<string>????</string>
@@ -28,9 +28,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>BBall</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.RaiseMan</string>
+	<string>com.bignerdranch.RaiseMan</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
