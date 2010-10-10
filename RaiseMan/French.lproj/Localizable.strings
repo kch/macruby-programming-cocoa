@@ -5,3 +5,6 @@
    Created by Caio Chassot on 2010-10-10.
    Copyright 2010 __MyCompanyName__. All rights reserved.
  */
+"DELETE"      = "Supprimer";
+"SURE_DELETE" = "Etés-vous sûr que vous voulez effacer ces %d données?";
+"CANCEL"      = "Annuler";

@@ -7,6 +7,12 @@
 #
 
 require 'PreferenceController'
+
+# fake the NSLocalizedString macro in MacRuby
+def NSLocalizedString(key)
+  NSBundle.mainBundle.localizedStringForKey(key, value:"", table:nil)
+end
+
 class MyDocument < NSDocument
   K_UNIMP_ERR = -4
   attr_accessor :employees, :tableView, :employeeController
@@ -33,12 +39,11 @@ class MyDocument < NSDocument
   end
 
   def removeEmployee(sender)
-    c = employeeController.selectedObjects.count
-    NSAlert.alertWithMessageText("Delete?",
-                   defaultButton:"Delete",
-                 alternateButton:"Keep, but clear raise",
-                     otherButton:"Cancel",
-       informativeTextWithFormat:"Do you really want to delete #{c} #{c == 1 ? 'person' : 'people'}?")
+    NSAlert.alertWithMessageText(NSLocalizedString("DELETE"),
+                   defaultButton:NSLocalizedString("DELETE"),
+                 alternateButton:NSLocalizedString("CANCEL"),
+                     otherButton:nil,
+       informativeTextWithFormat:(NSLocalizedString("SURE_DELETE") % employeeController.selectedObjects.count))
       .beginSheetModalForWindow(tableView.window,
                   modalDelegate:self,
                  didEndSelector:(:"alertEnded:code:context:"),
@@ -46,10 +51,7 @@ class MyDocument < NSDocument
   end
 
   def alertEnded(alert, code:choice, context:_)
-    case choice
-    when NSAlertDefaultReturn  ; employeeController.remove(nil)
-    when NSAlertAlternateReturn; employeeController.selectedObjects.each { |person| person.expectedRaise = 0.0 }
-    end
+    employeeController.remove(nil) if choice == NSAlertDefaultReturn
   end
 
   def startObservingPerson(person)
