@@ -13,6 +13,7 @@
 		5603453E12620A4F0051CAF8 /* AppController.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5603453D12620A4F0051CAF8 /* AppController.rb */; };
 		5603454312620BA80051CAF8 /* PreferenceController.rb in Resources */ = {isa = PBXBuildFile; fileRef = 5603454212620BA80051CAF8 /* PreferenceController.rb */; };
 		5603454512620C0A0051CAF8 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5603454412620C0A0051CAF8 /* Preferences.xib */; };
+		5603469B126249B10051CAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56034699126249B10051CAF8 /* Localizable.strings */; };
 		567CC8F712616F3C00A50D99 /* BBall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 567CC8F612616F3C00A50D99 /* BBall.icns */; };
 		567FE79F12596EDF00C9229B /* Person.rb in Resources */ = {isa = PBXBuildFile; fileRef = 567FE79E12596EDF00C9229B /* Person.rb */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -35,6 +36,9 @@
 		5603453D12620A4F0051CAF8 /* AppController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = AppController.rb; sourceTree = "<group>"; };
 		5603454212620BA80051CAF8 /* PreferenceController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PreferenceController.rb; sourceTree = "<group>"; };
 		5603454412620C0A0051CAF8 /* Preferences.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		56034697126248B70051CAF8 /* French */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = French; path = French.lproj/MyDocument.xib; sourceTree = "<group>"; };
+		5603469A126249B10051CAF8 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5603469C126249F60051CAF8 /* French */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		567CC8F612616F3C00A50D99 /* BBall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BBall.icns; sourceTree = "<group>"; };
 		567FE79E12596EDF00C9229B /* Person.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Person.rb; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				5603453D12620A4F0051CAF8 /* AppController.rb */,
 				5603454212620BA80051CAF8 /* PreferenceController.rb */,
+				56034699126249B10051CAF8 /* Localizable.strings */,
 			);
 			name = RaiseMan;
 			sourceTree = "<group>";
@@ -197,6 +202,7 @@
 				5603453E12620A4F0051CAF8 /* AppController.rb in Resources */,
 				5603454312620BA80051CAF8 /* PreferenceController.rb in Resources */,
 				5603454512620C0A0051CAF8 /* Preferences.xib in Resources */,
+				5603469B126249B10051CAF8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,10 +228,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		56034699126249B10051CAF8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5603469A126249B10051CAF8 /* English */,
+				5603469C126249F60051CAF8 /* French */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CD65564B11C94A3C00285927 /* MyDocument.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CD6AC70311C94956006B4F03 /* English */,
+				56034697126248B70051CAF8 /* French */,
 			);
 			name = MyDocument.xib;
 			sourceTree = "<group>";
