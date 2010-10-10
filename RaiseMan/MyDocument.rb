@@ -14,6 +14,7 @@ class MyDocument < NSDocument
   def init
     super
     @employees = []
+    NSNotificationCenter.defaultCenter.addObserver(self, selector: :"handleColorChange:", name:BNRColorChangedNotification, object:nil)
     self
   end
 
@@ -103,6 +104,13 @@ class MyDocument < NSDocument
   # Return lowercase 'untitled', to comply with HIG
   def displayName
     fileURL ? super : super.sub(/^[[:upper:]]/) {|s| s.downcase}
+  end
+
+
+  ### Handling notifications
+
+  def handleColorChange(notification)
+    tableView.setBackgroundColor(notification.userInfo[:color])
   end
 
 end

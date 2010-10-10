@@ -6,8 +6,9 @@
 #  Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 #
 
-BNRTableBgColorKey = "TableBackgroundColor"
-BNREmptyDocKey     = "EmptyDocumentFlag"
+BNRTableBgColorKey          = "TableBackgroundColor"
+BNREmptyDocKey              = "EmptyDocumentFlag"
+BNRColorChangedNotification = "BNRColorChanged"
 
 class PreferenceController < NSWindowController
 
@@ -24,7 +25,9 @@ class PreferenceController < NSWindowController
   end
 
   def changeBackgroundColor(sender)
-    defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(colorWell.color), forKey:BNRTableBgColorKey)
+    color = colorWell.color
+    defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(color), forKey:BNRTableBgColorKey)
+    NSNotificationCenter.defaultCenter.postNotificationName(BNRColorChangedNotification, object:self, userInfo:{ color:color })
   end
 
   def changeNewEmptyDoc(sender)
