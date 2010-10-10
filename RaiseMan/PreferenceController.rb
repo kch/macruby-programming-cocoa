@@ -6,7 +6,11 @@
 #  Copyright (c) 2010 __MyCompanyName__. All rights reserved.
 #
 
+BNRTableBgColorKey = "TableBackgroundColor"
+BNREmptyDocKey     = "EmptyDocumentFlag"
+
 class PreferenceController < NSWindowController
+
   attr_accessor :colorWell, :checkbox
 
   def init
@@ -15,14 +19,29 @@ class PreferenceController < NSWindowController
   end
 
   def windowDidLoad
-    NSLog("Nib file is loaded")
+    colorWell.color = tableBgColor
+    checkbox.state  = emptyDoc?
   end
 
   def changeBackgroundColor(sender)
-    NSLog("Color changed #{colorWell.color.description}")
+    defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(colorWell.color), forKey:BNRTableBgColorKey)
   end
 
   def changeNewEmptyDoc(sender)
-    NSLog("Checkbox changed #{checkbox.state}")
+    defaults.setBool(checkbox.state == 1, forKey:BNREmptyDocKey)
+  end
+
+  def tableBgColor
+    NSKeyedUnarchiver.unarchiveObjectWithData(defaults.objectForKey(BNRTableBgColorKey))
+  end
+
+  def emptyDoc?
+    defaults.boolForKey(BNREmptyDocKey)
+  end
+
+  private
+
+  def defaults
+    NSUserDefaults.standardUserDefaults
   end
 end

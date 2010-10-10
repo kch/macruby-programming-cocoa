@@ -6,6 +6,7 @@
 # Copyright __MyCompanyName__ 2010. All rights reserved.
 #
 
+require 'PreferenceController'
 class MyDocument < NSDocument
   K_UNIMP_ERR = -4
   attr_accessor :employees, :tableView, :employeeController
@@ -76,6 +77,12 @@ class MyDocument < NSDocument
   # Name of nib containing document window
   def windowNibName
     'MyDocument'
+  end
+
+  def windowControllerDidLoadNib(controller)
+    super
+    tableView.backgroundColor = \
+      NSKeyedUnarchiver.unarchiveObjectWithData(NSUserDefaults.standardUserDefaults.objectForKey(BNRTableBgColorKey))
   end
 
   # Document data representation for saving (return NSData)
