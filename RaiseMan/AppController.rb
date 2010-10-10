@@ -10,9 +10,11 @@ require 'PreferenceController'
 class AppController
   attr_accessor :preferenceController
 
-  NSUserDefaults.standardUserDefaults.registerDefaults \
-    BNRTableBgColorKey => NSKeyedArchiver.archivedDataWithRootObject(NSColor.yellowColor),
-    BNREmptyDocKey     => true
+  def self._initialize
+    NSUserDefaults.standardUserDefaults.registerDefaults \
+      BNRTableBgColorKey => NSKeyedArchiver.archivedDataWithRootObject(NSColor.yellowColor),
+      BNREmptyDocKey     => true
+  end
 
   def showPreferencePanel(sender)
     (@preferenceController ||= PreferenceController.new).showWindow(self)
