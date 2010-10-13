@@ -138,9 +138,7 @@ class BigLetterView < NSView
 
   def readFromPasteboard(pb)
     return false unless pb.types.include? NSStringPboardType
-    s = pb.stringForType(NSStringPboardType)
-    return false unless s.length == 1
-    self.string = s
+    self.string = pb.stringForType(NSStringPboardType).BNR_firstLetter
     return true
   end
 
