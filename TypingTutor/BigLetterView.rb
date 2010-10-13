@@ -13,10 +13,9 @@ class BigLetterView < NSView
     super or return nil
     @bgColor    = NSColor.yellowColor
     @string     = " "
-    @attributes = {
-      NSFontAttributeName            => NSFont.fontWithName("Helvetica", size:75),
-      NSForegroundColorAttributeName => NSColor.redColor,
-    }
+    @attributes = { NSFontAttributeName            => NSFont.fontWithName("Helvetica", size:75),
+                    NSForegroundColorAttributeName => NSColor.redColor, }
+    registerForDraggedTypes [NSStringPboardType]
     self
   end
 
@@ -44,8 +43,12 @@ class BigLetterView < NSView
   end
 
   def drawRect(rect)
-    bgColor.set
-    NSBezierPath.fillRect(bounds)
+    if @highlighted
+      NSGradient.alloc.initWithStartingColor(NSColor.whiteColor, endingColor:bgColor).drawInRect(bounds, relativeCenterPosition:NSZeroPoint)
+    else
+      bgColor.set
+      NSBezierPath.fillRect(bounds)
+    end
     drawStringCenteredIn(bounds)
     return unless window.firstResponder == self && NSGraphicsContext.currentContextDrawingToScreen
     NSGraphicsContext.saveGraphicsState
@@ -153,6 +156,81 @@ class BigLetterView < NSView
 
   def paste(sender)
     readFromPasteboard(NSPasteboard.generalPasteboard) or NSBeep()
+  end
+
+
+  ### Drag source
+
+  def draggingSourceOperationMaskForLocal(isLocal)
+    NSDragOperationCopy | NSDragOperationDelete
+  end
+
+  def mouseDown(event)
+    @mouseDownEvent = event
+  end
+
+  def mouseDragged(event)
+    down, _  = locations =  [@mouseDownEvent, event].map(&:locationInWindow)
+    distance = Math.hypot(*[:x, :y].map { |m| locations.map(&m).inject(&:-) })
+    return if distance < 3
+    return if string.empty?
+    size  = string.sizeWithAttributes(@attributes)
+    image = NSImage.alloc.initWithSize(size)
+    image.lockFocus
+    drawStringCenteredIn(NSRect.new(NSZeroPoint, size))
+    image.unlockFocus
+    NSPasteboard.pasteboardWithName(NSDragPboard).tap { |pb|
+      writeToPasteboard(pb)
+      dragImage(image,
+                at:self.convertPoint(down, fromView:nil).tap { |dp| dp.x -= size.width / 2; dp.y -= size.height / 2 },
+            offset:NSSize.new(0, 0),
+             event:@mouseDownEvent,
+        pasteboard:pb,
+            source:self,
+         slideBack:true) }
+  end
+
+  def draggedImage(image, endedAt:screenPoint, operation:operation)
+    return unless operation == NSDragOperationDelete
+    self.string = ""
+  end
+
+
+  ### Drag destination
+
+  def draggingEntered(sender)
+    NSLog("draggingEntered")
+    return NSDragOperationNone if sender.draggingSource == self
+    @highlighted = true
+    setNeedsDisplay true
+    return NSDragOperationCopy
+  end
+
+  def draggingUpdated(sender)
+    NSLog("Operation mask = #{sender.draggingSourceOperationMask}")
+    return NSDragOperationNone if sender.draggingSource == self
+    return NSDragOperationCopy
+  end
+
+  def draggingExited(sender)
+    NSLog("draggingExited")
+    @highlighted = false
+    setNeedsDisplay true
+  end
+
+  def prepareForDragOperation(sender)
+    true
+  end
+
+  def performDragOperation(sender)
+    (NSLog("Error: could not read from dragging pasteboard"); return false) unless readFromPasteboard(sender.draggingPasteboard)
+    return true
+  end
+
+  def concludeDragOperation(sender)
+    NSLog("concludeDragOperation")
+    @highlighted = false
+    setNeedsDisplay true
   end
 
 end
