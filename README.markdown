@@ -7,7 +7,7 @@ I strived for very idiomatic ruby. This code is 100% Objective-C-isms-free.
 * Each commit message mentions the chapter for the project at that stage
 * Each commit message is also annotated with the path to the roughly equivalent Cocoa solution in [Hillegass's tarball][objc-solutions]
 
-This is incomplete. I went up to chapter 18. I don't know when / if I'll do the rest.
+This is incomplete. I went up to chapter 24. I don't know when / if I'll do the rest.
 
 In addition to the exercises, a few challenges are done too.
 
