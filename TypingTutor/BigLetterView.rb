@@ -7,11 +7,16 @@
 #
 
 class BigLetterView < NSView
-  attr_accessor :string, :bgColor
+  attr_accessor :string, :bgColor, :attributes
 
   def initWithFrame(rect)
     super or return nil
-    @bgColor, @string = NSColor.yellowColor, " "
+    @bgColor    = NSColor.yellowColor
+    @string     = " "
+    @attributes = {
+      NSFontAttributeName            => NSFont.fontWithName("Helvetica", size:75),
+      NSForegroundColorAttributeName => NSColor.redColor,
+    }
     self
   end
 
@@ -26,6 +31,7 @@ class BigLetterView < NSView
 
   def setString(s)
     @string = s
+    setNeedsDisplay true
     NSLog("The string is now #{s.inspect}")
   end
   alias_method :string=, :setString
@@ -40,11 +46,18 @@ class BigLetterView < NSView
   def drawRect(rect)
     bgColor.set
     NSBezierPath.fillRect(bounds)
+    drawStringCenteredIn(bounds)
     return unless window.firstResponder == self && NSGraphicsContext.currentContextDrawingToScreen
     NSGraphicsContext.saveGraphicsState
     NSSetFocusRingStyle(NSFocusRingOnly)
     NSBezierPath.fillRect(bounds)
     NSGraphicsContext.restoreGraphicsState
+  end
+
+  def drawStringCenteredIn(rect)
+    strSize   = string.sizeWithAttributes(@attributes)
+    strOrigin = NSPoint.new *[[:x, :width], [:y, :height]].map { |p, l| rect.origin.send(p) + (rect.size.send(l) - strSize.send(l)) / 2 }
+    string.drawAtPoint(strOrigin, withAttributes:@attributes)
   end
 
 
@@ -88,6 +101,26 @@ class BigLetterView < NSView
 
   def deleteBackward(sender)
     self.string = " "
+  end
+
+
+  ### PDF
+
+  def savePDF(sender)
+    panel = NSSavePanel.savePanel
+    panel.requiredFileType = "pdf"
+    panel.beginSheetForDirectory(nil,
+                            file:nil,
+                  modalForWindow:window,
+                   modalDelegate:self,
+                  didEndSelector:"didEnd:returnCode:contextInfo:",
+                     contextInfo:nil)
+  end
+
+  def didEnd(sheet, returnCode:code, contextInfo:_)
+    return unless code == NSOKButton
+    dataWithPDFInsideRect(bounds).writeToFile(sheet.filename, options:0, error:(e = Pointer.new(:object))) and return
+    NSAlert.alertWithError(e[0]).runModal
   end
 
 end
