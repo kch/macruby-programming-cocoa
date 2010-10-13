@@ -41,14 +41,20 @@ class StretchView < NSView
   ### Mouse events
 
   def mouseDown(event)
+    @autoscrollTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target:self, selector:"doAutoscroll:", userInfo:nil, repeats:true)
     settingCurrentPoint(event) { @downPoint = @currentPoint }
   end
 
+  def doAutoscroll(timer)
+    autoscroll(NSApp.currentEvent)
+  end
+
   def mouseDragged(event)
-    settingCurrentPoint(event) { autoscroll(event) }
+    settingCurrentPoint(event)
   end
 
   def mouseUp(event)
+    @autoscrollTimer.invalidate
     settingCurrentPoint(event)
   end
 
