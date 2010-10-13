@@ -119,16 +119,21 @@ class BigLetterView < NSView
 
   def didEnd(sheet, returnCode:code, contextInfo:_)
     return unless code == NSOKButton
-    dataWithPDFInsideRect(bounds).writeToFile(sheet.filename, options:0, error:(e = Pointer.new(:object))) and return
+    pdfData.writeToFile(sheet.filename, options:0, error:(e = Pointer.new(:object))) and return
     NSAlert.alertWithError(e[0]).runModal
+  end
+
+  def pdfData
+    dataWithPDFInsideRect(bounds)
   end
 
 
   ### Pasteboard
 
   def writeToPasteboard(pb)
-    pb.declareTypes([NSStringPboardType], owner:self)
+    pb.declareTypes([NSStringPboardType, NSPDFPboardType], owner:self)
     pb.setString(string, forType:NSStringPboardType)
+    pb.setData(pdfData, forType:NSPDFPboardType)
   end
 
   def readFromPasteboard(pb)
