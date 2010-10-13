@@ -123,4 +123,33 @@ class BigLetterView < NSView
     NSAlert.alertWithError(e[0]).runModal
   end
 
+
+  ### Pasteboard
+
+  def writeToPasteboard(pb)
+    pb.declareTypes([NSStringPboardType], owner:self)
+    pb.setString(string, forType:NSStringPboardType)
+  end
+
+  def readFromPasteboard(pb)
+    return false unless pb.types.include? NSStringPboardType
+    s = pb.stringForType(NSStringPboardType)
+    return false unless s.length == 1
+    self.string = s
+    return true
+  end
+
+  def cut(sender)
+    copy(sender)
+    self.string = ""
+  end
+
+  def copy(sender)
+    writeToPasteboard(NSPasteboard.generalPasteboard)
+  end
+
+  def paste(sender)
+    readFromPasteboard(NSPasteboard.generalPasteboard) or NSBeep()
+  end
+
 end
