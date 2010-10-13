@@ -48,6 +48,7 @@
 		4DE3BE140D8651D900ECA448 /* MacRuby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE3BE130D8651D900ECA448 /* MacRuby.framework */; };
 		56A57555126533680032F55B /* BigLetterView.rb in Resources */ = {isa = PBXBuildFile; fileRef = 56A57554126533680032F55B /* BigLetterView.rb */; };
 		56B5278A12655257003C9541 /* FirstLetter.rb in Resources */ = {isa = PBXBuildFile; fileRef = 56B5278912655257003C9541 /* FirstLetter.rb */; };
+		56B527DB12656526003C9541 /* AppController.rb in Resources */ = {isa = PBXBuildFile; fileRef = 56B527DA12656526003C9541 /* AppController.rb */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -79,6 +80,7 @@
 		4DE3BE130D8651D900ECA448 /* MacRuby.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MacRuby.framework; path = /Library/Frameworks/MacRuby.framework; sourceTree = "<absolute>"; };
 		56A57554126533680032F55B /* BigLetterView.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = BigLetterView.rb; sourceTree = "<group>"; };
 		56B5278912655257003C9541 /* FirstLetter.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = FirstLetter.rb; sourceTree = "<group>"; };
+		56B527DA12656526003C9541 /* AppController.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = AppController.rb; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* TypingTutor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TypingTutor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -169,6 +171,7 @@
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				56A57554126533680032F55B /* BigLetterView.rb */,
+				56B527DA12656526003C9541 /* AppController.rb */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				2BFA9DA710CDF852007972A1 /* MainMenu.xib in Resources */,
 				56A57555126533680032F55B /* BigLetterView.rb in Resources */,
 				56B5278A12655257003C9541 /* FirstLetter.rb in Resources */,
+				56B527DB12656526003C9541 /* AppController.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
