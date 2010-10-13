@@ -7,13 +7,13 @@
 #
 
 class AppController
-  MAX_COUNT  = 100
-  COUNT_STEP =   5
+  MAX_COUNT = 100
 
-  attr_accessor :inLetterView, :outLetterView, :count
+  attr_accessor :inLetterView, :outLetterView, :speedSheet, :stepSize, :count
 
   def initialize
-    @letters = %w[ a s d f j k l ; ]
+    @letters  = %w[ a s d f j k l ; ]
+    @stepSize = 5
     srand
   end
 
@@ -21,13 +21,18 @@ class AppController
     showAnotherLetter
   end
 
+
+  ### Count
+
   def resetCount
     changingValue("count") { 0 }
   end
 
   def incrementCount
-    changingValue("count") { [count + COUNT_STEP, MAX_COUNT].min }
+    changingValue("count") { [count + stepSize, MAX_COUNT].min }
   end
+
+  ### Letters
 
   def showAnotherLetter
     begin letter = @letters.sample end until letter != @last_letter
@@ -49,6 +54,18 @@ class AppController
   def checkThem(timer)
     showAnotherLetter if inLetterView.string == outLetterView.string
     (count < MAX_COUNT) ? incrementCount : (NSBeep(); resetCount)
+  end
+
+
+  ### Speed sheet
+
+  def showSeedSheet(sender)
+    NSApp.beginSheet(speedSheet, modalForWindow:inLetterView.window, modalDelegate:nil, didEndSelector:nil, contextInfo:nil)
+  end
+
+  def endSpeedSheet(sender)
+    NSApp.endSheet(speedSheet)
+    speedSheet.orderOut(sender)
   end
 
 
