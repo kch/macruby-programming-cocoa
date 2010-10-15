@@ -69,6 +69,14 @@ class AppController
   end
 
 
+  ### Formatter
+
+  def control(control, didFailToFormatString:s, errorDescription:se)
+    NSLog("AppController told that formatting of #{s} failed: #{se}")
+    return false
+  end
+
+
   private
 
   def changingValue(k)
