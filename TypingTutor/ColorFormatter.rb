@@ -34,11 +34,19 @@ class ColorFormatter < NSFormatter
     return !!k
   end
 
-  def isPartialStringValid(s, newEditingString:p_newString, errorDescription:p_errorString)
-    return true if s.empty?
-    return true if firstColorKeyForPartialString(s)
-    p_errorString.assign "No such color"
+  def isPartialStringValid(p_sPartial, proposedSelectedRange:p_rProposed, originalString:sOriginal, originalSelectedRange:rOriginal, errorDescription:p_sError)
+    sPartial = p_sPartial[0]
+    return true  if sPartial.empty?                                     # empty strings are fine
+    return false if (k = firstColorKeyForPartialString(sPartial)).nil?  # no match
+    return true  if rOriginal.location == p_rProposed[0].location       # if this would not move the beginning of the selection, it's a delete
+    return true  if k.length == sPartial.length
+    # if the partial string is shorter than the match, provide the match and set the selection
+    p_sPartial[0], p_rProposed[0] = k, NSRange.new(sPartial.length, k.length - sPartial.length)
     return false
+  end
+
+  def attributedStringForObjectValue(c, withDefaultAttributes:h)
+    NSAttributedString.alloc.initWithString(stringForObjectValue(c) || "", attributes:h.merge(NSForegroundColorAttributeName => c))
   end
 
 
