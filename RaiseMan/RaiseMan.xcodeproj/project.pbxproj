@@ -16,6 +16,7 @@
 		5603469B126249B10051CAF8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56034699126249B10051CAF8 /* Localizable.strings */; };
 		567CC8F712616F3C00A50D99 /* BBall.icns in Resources */ = {isa = PBXBuildFile; fileRef = 567CC8F612616F3C00A50D99 /* BBall.icns */; };
 		567FE79F12596EDF00C9229B /* Person.rb in Resources */ = {isa = PBXBuildFile; fileRef = 567FE79E12596EDF00C9229B /* Person.rb */; };
+		56AD48B2126F2A0A0007E9F6 /* PeopleView.rb in Resources */ = {isa = PBXBuildFile; fileRef = 56AD48B1126F2A0A0007E9F6 /* PeopleView.rb */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -41,6 +42,7 @@
 		5603469C126249F60051CAF8 /* French */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
 		567CC8F612616F3C00A50D99 /* BBall.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = BBall.icns; sourceTree = "<group>"; };
 		567FE79E12596EDF00C9229B /* Person.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = Person.rb; sourceTree = "<group>"; };
+		56AD48B1126F2A0A0007E9F6 /* PeopleView.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = PeopleView.rb; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* RaiseMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaiseMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD6AC6FE11C94901006B4F03 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				5603453D12620A4F0051CAF8 /* AppController.rb */,
 				5603454212620BA80051CAF8 /* PreferenceController.rb */,
 				56034699126249B10051CAF8 /* Localizable.strings */,
+				56AD48B1126F2A0A0007E9F6 /* PeopleView.rb */,
 			);
 			name = RaiseMan;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 				5603454312620BA80051CAF8 /* PreferenceController.rb in Resources */,
 				5603454512620C0A0051CAF8 /* Preferences.xib in Resources */,
 				5603469B126249B10051CAF8 /* Localizable.strings in Resources */,
+				56AD48B2126F2A0A0007E9F6 /* PeopleView.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
