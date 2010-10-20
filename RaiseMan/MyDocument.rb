@@ -135,4 +135,10 @@ class MyDocument < NSDocument
     tableView.setBackgroundColor(notification.userInfo[:color])
   end
 
+
+  ### Printing
+
+  def printOperationWithSettings(h, error:p_error)
+    NSPrintOperation.printOperationWithView(PeopleView.alloc.initWithPeople(employees), printInfo:printInfo)
+  end
 end
